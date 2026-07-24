@@ -1,7 +1,5 @@
-from langchain_huggingface import HuggingFaceEmbeddings
-
+from langchain_huggingface import HuggingFaceEmbeddings, HuggingFaceEndpoint
 from app.config.settings import settings
-
 
 embeddings = HuggingFaceEmbeddings(
     model_name=settings.EMBEDDING_MODEL,
@@ -10,5 +8,6 @@ embeddings = HuggingFaceEmbeddings(
     },
     encode_kwargs={
         "normalize_embeddings": True
-    }
+    },
+    
 )
