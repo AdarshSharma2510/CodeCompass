@@ -1,16 +1,5 @@
-from app.retrieval.retriever import retriever
+from app.vectorstore.chroma import vector_store
 
 
-query = "Where is authentication implemented?"
-
-documents = retriever.invoke(query)
-
-print(f"\nRetrieved {len(documents)} documents:\n")
-
-for i, document in enumerate(documents, start=1):
-    print("=" * 80)
-    print(f"RESULT {i}")
-    print(f"FILE: {document.metadata.get('file_path')}")
-    print("=" * 80)
-    print(document.page_content[:1000])
-    print()
+print("Collection:", vector_store._collection.name)
+print("Count:", vector_store._collection.count())
