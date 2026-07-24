@@ -18,12 +18,21 @@ class RepositoryIngestionPipeline:
     def ingest(self, zip_path: Path) -> None:
         repository_path = self.extractor.extract(zip_path)
 
+        print(f"Extracted repository: {repository_path}")
+
         files = self.scanner.scan(repository_path)
+
+        print(f"Files scanned: {len(files)}")
 
         documents = self.loader.load(
             repository_path=repository_path,
-            files=files)
+            files=files,
+        )
+
+        print(f"Documents loaded: {len(documents)}")
 
         chunks = self.splitter.split(documents)
+
+        print(f"Chunks created: {len(chunks)}")
 
         self.indexer.index(chunks)

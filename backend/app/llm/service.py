@@ -1,9 +1,12 @@
+from app.chat.memory import load_history, save_message
 from app.llm.model import llm
-from app.llm.prompts import CODEBASE_PROMPT
+from app.llm.prompts import CODEBASE_QA_PROMPT
 from app.retrieval.retriever import retriever
 
 
 def ask_codebase(question: str) -> str:
+    history = load_history()
+
     documents = retriever.invoke(question)
 
     context = "\n\n".join(
@@ -16,8 +19,16 @@ def ask_codebase(question: str) -> str:
         ]
     )
 
-    prompt = CODEBASE_PROMPT.invoke(
+    history_text = "\n\n".join(
+        [
+            f"{message.type.upper()}: {message.content}"
+            for message in history
+        ]
+    )
+
+    prompt = CODEBASE_QA_PROMPT.invoke(
         {
+            "history": history_text,
             "context": context,
             "question": question,
         }
@@ -25,4 +36,9 @@ def ask_codebase(question: str) -> str:
 
     response = llm.invoke(prompt)
 
-    return response.content
+    answer = response.content
+
+    save_message("user", question)
+    save_message("assistant", answer)
+
+    return answer

@@ -2,7 +2,7 @@ from pathlib import Path
 import shutil
 
 from fastapi import APIRouter, File, HTTPException, UploadFile
-
+from app.config.settings import settings
 from app.ingestion.pipeline import RepositoryIngestionPipeline
 
 router = APIRouter(
@@ -10,7 +10,7 @@ router = APIRouter(
     tags=["Repositories"],
 )
 
-UPLOAD_PATH = Path("data/upload.zip")
+UPLOAD_PATH = settings.UPLOAD_PATH
 
 
 @router.post("/upload")
