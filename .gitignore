@@ -1,0 +1,39 @@
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual Environments
+.venv/
+venv/
+
+# Environment Variables
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Generated Project Data
+# -----------------------------
+backend/data/repository/
+backend/data/chroma/
+backend/data/upload.zip
+
+# -----------------------------
+# Python Packaging
+# -----------------------------
+build/
+dist/
+*.egg-info/

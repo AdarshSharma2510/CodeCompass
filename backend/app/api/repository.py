@@ -1,11 +1,14 @@
 from pathlib import Path
 import shutil
-from app.ingestion.pipeline import RepositoryIngestionPipeline
+
 from fastapi import APIRouter, File, HTTPException, UploadFile
 
-from app.ingestion.extractor import RepositoryExtractor
+from app.ingestion.pipeline import RepositoryIngestionPipeline
 
-router = APIRouter(prefix="/repositories", tags=["Repositories"])
+router = APIRouter(
+    prefix="/repositories",
+    tags=["Repositories"],
+)
 
 UPLOAD_PATH = Path("data/upload.zip")
 
@@ -23,16 +26,19 @@ async def upload_repository(file: UploadFile = File(...)):
     with UPLOAD_PATH.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    extractor = RepositoryExtractor()
+    pipeline = RepositoryIngestionPipeline()
 
     try:
-        repository_path = extractor.extract(UPLOAD_PATH)
+        pipeline.ingest(UPLOAD_PATH)
     except ValueError as e:
-        raise HTTPException(status_code=400, detail=str(e))
-
-    UPLOAD_PATH.unlink(missing_ok=True)
+        raise HTTPException(
+            status_code=400,
+            detail=str(e),
+        )
+    finally:
+        UPLOAD_PATH.unlink(missing_ok=True)
 
     return {
-        "message": "Repository uploaded successfully.",
-        "repository_path": str(repository_path),
+        "message": "Repository indexed successfully."
     }
+    
