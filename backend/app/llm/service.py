@@ -8,6 +8,12 @@ def ask_codebase(question: str) -> str:
     history = load_history()
     documents = retrieve_and_rerank(question)
 
+    if not documents:
+        answer = "I cannot find that in the retrieved repository context."
+        save_message("user", question)
+        save_message("assistant", answer)
+        return answer
+
     context = "\n\n".join(
         [
             f"FILE: {document.metadata.get('file_path')}\n"
