@@ -1,51 +1,77 @@
-# Python
+# =========================
+# Python / Backend
+# =========================
+
 __pycache__/
 *.py[cod]
-*.pyo
-*.pyd
+*$py.class
 
-# Virtual environments
 .venv/
 venv/
 env/
 
-# Environment files
+# Environment variables
 .env
 .env.*
 
-# IDE / editor
-.vscode/
-.idea/
-*.swp
+# =========================
+# AI / Local Data
+# =========================
 
-# OS files
+# ChromaDB / vector database
+chroma_db/
+chroma/
+*.sqlite
+*.sqlite3
+
+# Downloaded or generated model/cache files
+.cache/
+huggingface/
+hf_cache/
+
+# =========================
+# Repository Processing Data
+# =========================
+
+# Extracted uploaded repositories
+data/
+
+# =========================
+# Frontend / Node
+# =========================
+
+node_modules/
+dist/
+build/
+
+# Vite
+.vite/
+
+# =========================
+# Logs
+# =========================
+
+*.log
+logs/
+
+# =========================
+# OS Files
+# =========================
+
 .DS_Store
 Thumbs.db
 
-# Logs
-*.log
+# =========================
+# IDE / Editor
+# =========================
 
-# Temporary test scripts
-test.py
-test_llm.py
-test_retrieval.py
-test_*.py
+.vscode/
+.idea/
 
-# Temporary app data
-backend/data/upload.zip
-backend/data/uploads/
-backend/data/repository/
-backend/data/chroma/
-backend/data/chat/
-backend/data/flashrank/
+# =========================
+# Python tooling
+# =========================
 
-# If you sometimes run from backend/ and create data there
-data/upload.zip
-data/uploads/
-data/repository/
-data/chroma/
-data/chat/
-data/flashrank/
-
-# Hugging Face / model cache if ever created in project
-.cache/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
