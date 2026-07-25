@@ -8,6 +8,8 @@ ENV_FILE = BACKEND_DIR / ".env"
 
 
 class Settings(BaseSettings):
+    APP_NAME: str = "CodeCompass"
+    APP_VERSION: str = "1.0.0"
     HF_ACCESS_TOKEN: str
     EMBEDDING_MODEL: str
 

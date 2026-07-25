@@ -1,16 +1,17 @@
-from app.retrieval.retriever import retrieve_and_rerank
+from app.llm.service import ask_codebase
 
+questions = [
+    "Where is the Kanban board implemented?",
+    "How is the user interface structured?",
+    "Where is authentication implemented?",
+]
 
-question = "Where is authentication implemented?"
+for question in questions:
+    print("\n" + "=" * 100)
+    print("QUESTION:", question)
+    print("=" * 100)
 
-documents = retrieve_and_rerank(question)
+    answer = ask_codebase(question)
 
-print(f"\nRetrieved {len(documents)} documents:\n")
-
-for i, document in enumerate(documents, start=1):
-    print("=" * 80)
-    print(f"RESULT {i}")
-    print(f"FILE: {document.metadata.get('file_path')}")
-    print("=" * 80)
-    print(document.page_content[:1000])
-    print()
+    print("\nANSWER:\n")
+    print(answer)

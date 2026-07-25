@@ -1,39 +1,51 @@
-# -----------------------------
 # Python
-# -----------------------------
 __pycache__/
 *.py[cod]
 *.pyo
 *.pyd
 
-# Virtual Environments
+# Virtual environments
 .venv/
 venv/
+env/
 
-# Environment Variables
+# Environment files
 .env
+.env.*
 
-# IDE
+# IDE / editor
 .vscode/
 .idea/
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
 
 # Logs
 *.log
 
-# OS Files
-.DS_Store
-Thumbs.db
+# Temporary test scripts
+test.py
+test_llm.py
+test_retrieval.py
+test_*.py
 
-# -----------------------------
-# Generated Project Data
-# -----------------------------
+# Temporary app data
+backend/data/upload.zip
+backend/data/uploads/
 backend/data/repository/
 backend/data/chroma/
-backend/data/upload.zip
+backend/data/chat/
+backend/data/flashrank/
 
-# -----------------------------
-# Python Packaging
-# -----------------------------
-build/
-dist/
-*.egg-info/
+# If you sometimes run from backend/ and create data there
+data/upload.zip
+data/uploads/
+data/repository/
+data/chroma/
+data/chat/
+data/flashrank/
+
+# Hugging Face / model cache if ever created in project
+.cache/

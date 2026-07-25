@@ -1,25 +1,16 @@
-from app.retrieval.retriever import retriever
+from app.retrieval.retriever import retrieve_and_rerank
 
 
-questions = [
-    "Where is authentication implemented?",
-    "What does the main application entry point do?",
-    "How is the user interface structured?",
-]
+question = "Where is the Kanban board implemented?"
 
+documents = retrieve_and_rerank(question)
 
-for question in questions:
-    print("\n" + "=" * 100)
-    print(f"QUESTION: {question}")
-    print("=" * 100)
+print(f"\nRetrieved {len(documents)} documents:\n")
 
-    documents = retriever.invoke(question)
-
-    print(f"\nRetrieved {len(documents)} documents:\n")
-
-    for i, document in enumerate(documents, start=1):
-        print("-" * 100)
-        print(f"RESULT {i}")
-        print(f"FILE: {document.metadata.get('file_path')}")
-        print("-" * 100)
-        print(document.page_content[:1000])
+for i, document in enumerate(documents, start=1):
+    print("=" * 80)
+    print(f"RESULT {i}")
+    print(f"FILE: {document.metadata.get('file_path')}")
+    print("=" * 80)
+    print(document.page_content[:1000])
+    print()
