@@ -9,10 +9,17 @@ __pycache__/
 .venv/
 venv/
 env/
+ENV/
+
+# Python packaging
+*.egg-info/
+.eggs/
+dist/
 
 # Environment variables
 .env
 .env.*
+!.env.example
 
 # =========================
 # AI / Local Data
@@ -60,6 +67,7 @@ logs/
 
 .DS_Store
 Thumbs.db
+desktop.ini
 
 # =========================
 # IDE / Editor
@@ -75,3 +83,15 @@ Thumbs.db
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# =========================
+# Temporary files
+# =========================
+
+*.tmp
+*.temp
+*.swp
+*.swo
