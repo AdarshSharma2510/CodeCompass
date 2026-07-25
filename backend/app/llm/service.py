@@ -1,20 +1,17 @@
 from app.chat.memory import load_history, save_message
 from app.llm.model import llm
 from app.llm.prompts import CODEBASE_QA_PROMPT
-from app.retrieval.retriever import retriever
+from app.retrieval.retriever import retrieve_and_rerank
 
 
 def ask_codebase(question: str) -> str:
     history = load_history()
-
-    documents = retriever.invoke(question)
+    documents = retrieve_and_rerank(question)
 
     context = "\n\n".join(
         [
-            (
-                f"FILE: {document.metadata.get('file_path')}\n"
-                f"{document.page_content}"
-            )
+            f"FILE: {document.metadata.get('file_path')}\n"
+            f"{document.page_content}"
             for document in documents
         ]
     )
@@ -35,7 +32,6 @@ def ask_codebase(question: str) -> str:
     )
 
     response = llm.invoke(prompt)
-
     answer = response.content
 
     save_message("user", question)

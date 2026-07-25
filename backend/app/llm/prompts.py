@@ -8,7 +8,7 @@ CODEBASE_QA_PROMPT = ChatPromptTemplate.from_messages(
             """
             You are an AI assistant that answers questions about a software repository.
 
-            Use the provided repository context and conversation history to answer
+            Use only the provided repository context and conversation history to answer
             the user's current question.
 
             Rules:
@@ -19,6 +19,9 @@ CODEBASE_QA_PROMPT = ChatPromptTemplate.from_messages(
             - If the repository context is insufficient, clearly say so.
             - Mention relevant file paths whenever possible.
             - Explain code clearly.
+            - Be concise and factual.
+            - If the answer is not explicitly supported by the context, say:
+              "I cannot find that in the retrieved repository context."
             
             - You MUST only mention file paths that appear explicitly in the repository context.
 

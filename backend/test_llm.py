@@ -1,9 +1,16 @@
-from app.llm.service import ask_codebase
+from app.retrieval.retriever import retrieve_and_rerank
 
 
-question = "tell me in what file is it used. also specify what is the 'it' I am referring to" 
+question = "Where is authentication implemented?"
 
-answer = ask_codebase(question)
+documents = retrieve_and_rerank(question)
 
-print("\nANSWER:\n")
-print(answer)
+print(f"\nRetrieved {len(documents)} documents:\n")
+
+for i, document in enumerate(documents, start=1):
+    print("=" * 80)
+    print(f"RESULT {i}")
+    print(f"FILE: {document.metadata.get('file_path')}")
+    print("=" * 80)
+    print(document.page_content[:1000])
+    print()
