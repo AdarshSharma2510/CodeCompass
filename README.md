@@ -1,4 +1,4 @@
-# CodeCompass / RepoSense
+# CodeCompass
 
 CodeCompass is an AI-powered repository Q&A assistant. A user uploads a GitHub repository as a ZIP file, and the system indexes the code so the user can ask natural-language questions about the repository. The assistant retrieves relevant code context, reranks results, and generates grounded answers using a local Ollama model.
 
